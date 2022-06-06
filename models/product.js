@@ -20,4 +20,6 @@ const Product = sequelize.define("Product", {
   },
 });
 
+Product.sync();
+
 module.exports = Product;
