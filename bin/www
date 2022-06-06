@@ -7,7 +7,6 @@
 const app = require("../app");
 const debug = require("debug")("electronic-shop:server");
 const http = require("http");
-const sequelize = require("../db");
 
 /**
  * Get port from environment and store in Express.
@@ -82,10 +81,7 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  sequelize
-    .authenticate()
-    .then(() => debug("Connection has been established successfully"))
-    .catch((error) => debug("Unable to connect to the database:" + error));
+
   let bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
 }
