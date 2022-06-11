@@ -3,7 +3,21 @@ const router = express.Router();
 
 const Product = require("../models/product");
 
-router.get("/product", function (req, res, next) {
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: Retrieve a list of products
+ *     description: Retrieve a list of products.
+ *     responses:
+ *       200:
+ *         description: A list of users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ */
+router.get("/products", function (req, res, next) {
   Product.findAll()
     .then((result) => {
       res.status(200).json(result);
@@ -11,7 +25,17 @@ router.get("/product", function (req, res, next) {
     .catch((error) => res.status(500).json(error));
 });
 
-router.get("/product/:id", function (req, res, next) {
+/**
+ * @swagger
+ * /products/:id:
+ *   get:
+ *     summary: Retrieve one product
+ *     description: Retrieve one product using
+ *     responses:
+ *       200:
+ *         description: A list of users.
+ */
+router.get("/products/:id", function (req, res, next) {
   Product.findById(req.params.id)
     .then((result) => {
       res.status(200).json(result);
@@ -19,7 +43,17 @@ router.get("/product/:id", function (req, res, next) {
     .catch((error) => res.status(500).json(error));
 });
 
-router.post("/product", function (req, res, next) {
+/**
+ * @swagger
+ * /products:
+ *   post:
+ *     summary: Post one product
+ *     description: Retrieve one product using
+ *     responses:
+ *       200:
+ *         description: A list of users.
+ */
+router.post("/products", function (req, res, next) {
   const newProduct = { ...req.body };
   Product.create(newProduct)
     .then((result) => {
@@ -28,7 +62,17 @@ router.post("/product", function (req, res, next) {
     .catch((error) => res.status(500).json(error));
 });
 
-router.delete("/product/:id", function (req, res, next) {
+/**
+ * @swagger
+ * /products:
+ *   delete:
+ *     summary: Retrieve one product
+ *     description: Retrieve one product using
+ *     responses:
+ *       200:
+ *         description: Deletes a product.
+ */
+router.delete("/products/:id", function (req, res, next) {
   Product.delete({
     where: {
       id: req.params.id,
@@ -38,7 +82,17 @@ router.delete("/product/:id", function (req, res, next) {
     .catch((error) => res.status(500).json(error));
 });
 
-router.patch("/product/:id", function (req, res, next) {
+/**
+ * @swagger
+ * /products/:id:
+ *   patch:
+ *     summary: Retrieve one product
+ *     description: Retrieve one product using
+ *     responses:
+ *       200:
+ *         description: A list of users.
+ */
+router.patch("/products/:id", function (req, res, next) {
   const newProductFields = { ...req.body };
   Product.update(newProductFields, {
     where: {
